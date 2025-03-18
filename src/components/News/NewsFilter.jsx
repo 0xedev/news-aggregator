@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Button from "src/components/UI/Button.jsx";
+import Button from "@/components/UI/Button";
 
 export default function NewsFilter({ onCategoryChange }) {
   const [activeCategory, setActiveCategory] = useState("trending");

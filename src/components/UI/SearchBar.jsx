@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
-import Button from "src/components/UI/Button.jsx";
+import Button from "@/components/UI/Button";
 
 export default function SearchBar({ className = "" }) {
   const [query, setQuery] = useState("");

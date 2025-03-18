@@ -1,4 +1,4 @@
-import NewsCard from "src/components/News/NewsCard.jsx";
+import NewsCard from "@/components/News/NewsCard";
 
 export default function NewsList({ articles = [], loading = false }) {
   if (loading) {
