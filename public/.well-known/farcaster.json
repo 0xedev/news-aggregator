@@ -1,0 +1,18 @@
+{
+  "accountAssociation": {
+    "header": "eyJmaWQiOjIzOTM5NiwidHlwZSI6ImN1c3RvZHkiLCJrZXkiOiIweDRENEU1MjIzODRkNkYxMDkwYkZENEM0NTI3YTdkNTJERmQyMGJDYTMifQ",
+    "payload": "eyJkb21haW4iOiJuZXdzLWFnZy16ZXRhLnZlcmNlbC5hcHAifQ",
+    "signature": "MHg0YTZjMGNhMzIzYTY2ZmQwYzk0MGE4MTU1NmIwMzQ1MzgzODZlOTZlYjVjZWIxMTBkMTE4YjI3OTk5ZmJlZTE0MTM2NzM5NTZhOGNkNjM0Yzg1ZTYxODYzNDQ4ODc3Y2ViN2I2NWI0YjFlN2RkMTU1MzA1NDg2MzBkZjJjMTNmMDFj"
+  },
+  "frame": {
+    "version": "1",
+    "name": "FarNews",
+    "iconUrl": "https://news-agg-zeta.vercel.app/icon.png",
+    "homeUrl": "https://news-agg-zeta.vercel.app",
+    "imageUrl": "https://news-agg-zeta.vercel.app/image.png",
+    "buttonTitle": "Check out the latest news",
+    "splashImageUrl": "https://news-agg-zeta.vercel.app/splash.png",
+    "splashBackgroundColor": "#2294ed",
+    "webhookUrl": "https://news-agg-zeta.vercel.app/api/webhook"
+  }
+}
