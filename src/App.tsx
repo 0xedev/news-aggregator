@@ -18,7 +18,7 @@ interface Article {
 
 function App() {
   const [articles, setArticles] = useState<Article[]>([]);
-  const [query, setQuery] = useState("trump");
+  const [query, setQuery] = useState("politics");
   const [topic, setTopic] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
