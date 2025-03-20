@@ -128,7 +128,7 @@ function App() {
       </main>
       <footer className="bg-navbar text-neutral text-center py-4 text-sm mt-auto">
         <div className="container mx-auto px-4">
-          <p>© {new Date().getFullYear()} News App</p>
+          <p>© {new Date().getFullYear()} FarNews</p>
         </div>
       </footer>
     </div>
