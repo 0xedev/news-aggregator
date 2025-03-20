@@ -5,14 +5,7 @@ interface NavbarProps {
   onTopicSelect: (topic: string) => void;
 }
 
-const topics = [
-  "Politics",
-  "Sports",
-  "Crytocurrency",
-  "Technology",
-  "AI",
-  "World",
-];
+const topics = ["Politics", "Sports", "US", "Technology", "Business", "World"];
 
 function Navbar({ onSearch, onTopicSelect }: NavbarProps) {
   const [searchTerm, setSearchTerm] = useState("");

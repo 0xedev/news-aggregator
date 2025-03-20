@@ -36,7 +36,7 @@ function App() {
         setIsLoading(true);
         setError("");
         const searchQuery = topic ? topic : query;
-        const data = await fetchNews(searchQuery);
+        const data = await fetchNews(searchQuery, topic);
 
         // Sort articles by date (newest first)
         const sortedArticles = [...data].sort((a, b) => {
