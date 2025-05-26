@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import NewsList from "./components/NewsList";
-import Pagination from "./components/Pagination"; // New component we'll create
+import Pagination from "./components/Pagination";
 import { fetchNews } from "./utils/api";
 import "./styles/global.css";
 
@@ -22,15 +22,18 @@ function App() {
   const [topic, setTopic] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
+  const [referrer, setReferrer] = useState<string | null>(null);
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
-  const [articlesPerPage] = useState(9); // Show 9 articles per page (3x3 grid on desktop)
-
-  // Sorting state
-  const [] = useState("latest"); // default sort by latest
+  const [articlesPerPage] = useState(9);
 
   useEffect(() => {
+    // Detect referrer from URL
+    const params = new URLSearchParams(window.location.search);
+    const ref = params.get("referrer");
+    setReferrer(ref);
+
     async function getNews() {
       try {
         setIsLoading(true);
@@ -38,7 +41,6 @@ function App() {
         const searchQuery = topic ? topic : query;
         const data = await fetchNews(searchQuery, topic);
 
-        // Sort articles by date (newest first)
         const sortedArticles = [...data].sort((a, b) => {
           return (
             new Date(b.publishedAt).getTime() -
@@ -47,7 +49,7 @@ function App() {
         });
 
         setArticles(sortedArticles);
-        setCurrentPage(1); // Reset to first page when new search/topic
+        setCurrentPage(1);
       } catch (err) {
         setError("Failed to load news. Please try again later.");
         console.error("Error fetching news:", err);
@@ -70,7 +72,6 @@ function App() {
     setQuery("");
   };
 
-  // Get current articles for pagination
   const indexOfLastArticle = currentPage * articlesPerPage;
   const indexOfFirstArticle = indexOfLastArticle - articlesPerPage;
   const currentArticles = articles.slice(
@@ -78,7 +79,6 @@ function App() {
     indexOfLastArticle
   );
 
-  // Change page
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   return (
@@ -129,6 +129,16 @@ function App() {
       <footer className="bg-navbar text-neutral text-center py-4 text-sm mt-auto">
         <div className="container mx-auto px-4">
           <p>© {new Date().getFullYear()} FarNews</p>
+          {referrer === "policast" && (
+            <p className="mt-2">
+              <a
+                href="https://0xedev-buster-mkt.vercel.app"
+                className="text-primary hover:underline"
+              >
+                Back to Policast
+              </a>
+            </p>
+          )}
         </div>
       </footer>
     </div>
