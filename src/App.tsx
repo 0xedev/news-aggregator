@@ -132,7 +132,7 @@ function App() {
           {referrer === "policast" && (
             <p className="mt-2">
               <a
-                href="https://0xedev-buster-mkt.vercel.app"
+                href="https://buster-mkt.vercel.app"
                 className="text-primary hover:underline"
               >
                 Back to Policast
