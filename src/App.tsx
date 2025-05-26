@@ -8,7 +8,7 @@ import "./styles/global.css";
 interface Article {
   title: string;
   description: string;
-  urlToImage: string;
+  urlToImage: string | null;
   url: string;
   source: {
     name: string;
@@ -41,6 +41,7 @@ function App() {
         const searchQuery = topic ? topic : query;
         const data = await fetchNews(searchQuery, topic);
 
+        // Sort articles by publishedAt
         const sortedArticles = [...data].sort((a, b) => {
           return (
             new Date(b.publishedAt).getTime() -
@@ -48,7 +49,13 @@ function App() {
           );
         });
 
-        setArticles(sortedArticles);
+        // Balance sources across pages
+        const balancedArticles = balanceSources(
+          sortedArticles,
+          articlesPerPage
+        );
+
+        setArticles(balancedArticles);
         setCurrentPage(1);
       } catch (err) {
         setError("Failed to load news. Please try again later.");
@@ -59,6 +66,43 @@ function App() {
     }
     getNews();
   }, [query, topic]);
+
+  // Function to balance articles by source
+  const balanceSources = (articles: Article[], articlesPerPage: number) => {
+    const maxPerSource = 3; // Max articles from one source per page
+    const balanced: Article[] = [];
+    const sourceCounts: { [key: string]: number } = {};
+
+    // Initialize source counts
+    articles.forEach((article) => {
+      sourceCounts[article.source.name] = 0;
+    });
+
+    // Assign articles to pages
+    let articleIndex = 0;
+    while (articleIndex < articles.length) {
+      const pageArticles: Article[] = [];
+      const pageSourceCounts = { ...sourceCounts }; // Reset counts per page
+
+      // Fill one page
+      while (
+        pageArticles.length < articlesPerPage &&
+        articleIndex < articles.length
+      ) {
+        const article = articles[articleIndex];
+        const sourceName = article.source.name;
+
+        if (pageSourceCounts[sourceName] < maxPerSource) {
+          pageArticles.push(article);
+          pageSourceCounts[sourceName]++;
+          balanced.push(article);
+        }
+        articleIndex++;
+      }
+    }
+
+    return balanced;
+  };
 
   const handleSearch = (newQuery: string) => {
     if (newQuery.trim()) {
